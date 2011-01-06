@@ -60,3 +60,6 @@ def main():
                       traverseNamespace=True)
     c.configureWhere(quantum.tests.unit.__path__)
     sys.exit(run_tests(c))
+
+if __name__ == "__main__":
+    main()
