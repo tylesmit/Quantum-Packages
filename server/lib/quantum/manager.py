@@ -52,6 +52,7 @@ class QuantumManager(object):
         if config_file == None:
             fix_path = lambda p: os.path.abspath(os.path.expanduser(p))
             config_file_dirs = [fix_path(os.getcwd()),
+                        fix_path(os.path.join(os.getcwd(), 'server', 'etc')),
                         fix_path(os.path.join('~', '.quantum')),
                         fix_path('~'),
                         '/etc/quantum/',

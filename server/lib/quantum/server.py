@@ -59,3 +59,6 @@ def main():
         quantum_service.wait()
     except RuntimeError, e:
         sys.exit("ERROR: %s" % e)
+
+if __name__ == "__main__":
+    main()
