@@ -33,6 +33,7 @@ EXCEPTIONS = {
     431: exceptions.StateInvalid,
     432: exceptions.PortInUseClient,
     440: exceptions.AlreadyAttachedClient}
+AUTH_TOKEN_HEADER = "X-Auth-Token"
 
 
 class ApiCall(object):
@@ -82,7 +83,8 @@ class Client(object):
 
     def __init__(self, host="127.0.0.1", port=9696, use_ssl=False, tenant=None,
                 format="xml", testingStub=None, key_file=None, cert_file=None,
-                logger=None, action_prefix="/v1.0/tenants/{tenant_id}"):
+                auth_token=None, logger=None,
+                action_prefix="/v1.0/tenants/{tenant_id}"):
         """
         Creates a new client to some service.
 
@@ -94,6 +96,9 @@ class Client(object):
         :param testingStub: A class that stubs basic server methods for tests
         :param key_file: The SSL key file to use if use_ssl is true
         :param cert_file: The SSL cert file to use if use_ssl is true
+        :param auth_token: authentication token to be passed to server
+        :param logger: Logger object for the client library
+        :param action_prefix: prefix for request URIs
         """
         self.host = host
         self.port = port
@@ -105,6 +110,7 @@ class Client(object):
         self.key_file = key_file
         self.cert_file = cert_file
         self.logger = logger
+        self.auth_token = auth_token
         self.action_prefix = action_prefix
 
     def get_connection_type(self):
@@ -162,6 +168,9 @@ class Client(object):
             connection_type = self.get_connection_type()
             headers = headers or {"Content-Type":
                                       "application/%s" % self.format}
+            # if available, add authentication token
+            if self.auth_token:
+                headers[AUTH_TOKEN_HEADER] = self.auth_token
             # Open connection and send request, handling SSL certs
             certs = {'key_file': self.key_file, 'cert_file': self.cert_file}
             certs = dict((x, certs[x]) for x in certs if certs[x] != None)
@@ -177,7 +186,6 @@ class Client(object):
             if self.logger:
                 self.logger.debug("Quantum Client Reply (code = %s) :\n %s" \
                         % (str(status_code), data))
-
             if status_code in (httplib.OK,
                                httplib.CREATED,
                                httplib.ACCEPTED,
@@ -227,7 +235,7 @@ class Client(object):
         """
         Deserializes a an xml or json string into a dictionary
         """
-        if status_code in (202, 204):
+        if status_code == 204:
             return data
         return Serializer(self._serialization_metadata).\
                     deserialize(data, self.content_type())

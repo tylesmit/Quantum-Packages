@@ -85,7 +85,7 @@ PASSWORD = 'password'
 
 LOGGER_COMPONENT_NAME = "cisco_plugin"
 
-BLADE_INTF_DN = "blade-intf-distinguished-name"
+BLADE_INTF_DN = "blade_intf_distinguished_name"
 BLADE_INTF_ORDER = "blade-intf-order"
 BLADE_INTF_LINK_STATE = "blade-intf-link-state"
 BLADE_INTF_OPER_STATE = "blade-intf-operational-state"
@@ -149,3 +149,7 @@ LEAST_RSVD_BLADE_DICT = 'least_rsvd_blade_dict'
 UCSM_IP = 'ucsm_ip_address'
 
 NETWORK_ADMIN = 'network_admin'
+
+NETID_LIST = 'net_id_list'
+
+DELIMITERS = "[,;:\b\s]"
