@@ -6,7 +6,7 @@ except ImportError:
     from setuptools import setup, find_packages
 
 import os
-
+import sys
 
 Name='quantum-server'
 ProjecUrl=""
@@ -33,12 +33,17 @@ ProjectScripts = [
 PackageData = {
 }
 
+config_path = '/etc/quantum/'
+if '--user' in sys.argv:
+    config_path = 'etc/quantum/'
+
 DataFiles = [
-        ('/etc/quantum/',
+        (config_path,
 	['etc/quantum.conf','etc/quantum.conf.sample',
 	'etc/quantum.conf.test', 'etc/plugins.ini'])
 ]
 
+                                                                              
 
 setup(
     name=Name,
