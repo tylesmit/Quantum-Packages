@@ -59,7 +59,6 @@ HAS_EASY_INSTALL = bool(run_command(['which', 'easy_install'],
 HAS_VIRTUALENV = bool(run_command(['which', 'virtualenv'],
                                     check_exit_code=False).strip())
 
-
 def check_dependencies():
     """Make sure virtualenv is in the path."""
 
@@ -76,12 +75,17 @@ def check_dependencies():
     print 'done.'
 
 
-def create_virtualenv(venv=VENV):
+def create_virtualenv(venv=VENV, site_packages=False):
     """Creates the virtual environment and installs PIP only into the
     virtual environment
     """
     print 'Creating venv...',
-    run_command(['virtualenv', '-q', '--no-site-packages', VENV])
+
+    install = ['virtualenv', '-q', venv] 
+    if not site_packages:
+        install.insert(2, '--no-site-packages')
+    run_command(install)
+
     print 'done.'
     print 'Installing pip in virtualenv...',
     if not run_command(['tools/with_venv.sh', 'easy_install', 'pip']).strip():
