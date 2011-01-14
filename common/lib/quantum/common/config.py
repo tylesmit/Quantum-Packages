@@ -207,7 +207,7 @@ def find_config_file(options, args):
     dir_to_common = os.path.dirname(os.path.abspath(__file__))
     # Handle standard directory search for quantum.conf
     config_file_dirs = [fix_path(os.getcwd()),
-                        fix_path(os.path.join('~', '.quantum')),
+                        #fix_path(os.path.join('~', '.quantum')),
                         fix_path(os.path.join('~', '.quantum-venv', 'etc',
                                  'quantum')),
                         fix_path('~'),
@@ -215,6 +215,9 @@ def find_config_file(options, args):
                         os.path.join(FLAGS.state_path, 'etc', 'quantum'),
                         os.path.join(dir_to_common, '..', '..', '..',
                             '..', 'server', 'etc'),
+                        fix_path(os.path.join('~', '.local',
+                                              'etc', 'quantum')),
+                        '/usr/local/etc/quantum',
                         '/etc/quantum/',
                         '/etc']
     for cfg_dir in config_file_dirs:
