@@ -40,7 +40,8 @@ def uninstall_packages(options, args=None):
     """Removes packages"""
     cmd = ['pip', 'uninstall', '-y']
 
-    for package in ['quantum-' + x.split('/')[-1] for x in BASE_PACKAGES + PLUGINS]:
+    for package in ['quantum-' + x.split('/')[-1] \
+                    for x in BASE_PACKAGES + PLUGINS]:
         print "Uninstalling %s" % package
         # Each package needs its own command list, and it needs the path
         # in the correct place (after "pip uninstall"
@@ -84,22 +85,26 @@ def install_packages(options, args=None):
 
 def build_packages(options, args=None):
     """Build RPM and/or deb packages"""
+    # If we weren't given a package type, default to rpm
     if not args:
         args = 'rpm'
     if args not in ['rpm', 'deb', 'all']:
         print "arg must be rpm, deb, or all"
 
+    # Since we need to cd to build rpms, we call this sh script
     cmd = ['tools/build_rpms.sh']
     for package in BASE_PACKAGES + PLUGINS:
         print "Building %s rpm" % package
         pcmd = deepcopy(cmd)
         pcmd.append(package)
-        #install_venv.run_command(pcmd)
+        install_venv.run_command(pcmd)
         print "done."
 
+    # If we're only building rpms we're done
     if args is 'rpm':
         return
 
+    # Use alient to build debs from the rpms
     cmd = ['tools/build_debs.sh']
     if HAS_FAKEROOT:
         cmd.insert(0, 'fakeroot')
@@ -108,7 +113,7 @@ def build_packages(options, args=None):
             print "Building %s deb" % p
             pcmd = deepcopy(cmd)
             pcmd.append(p)
-            #install_venv.run_command(pcmd)
+            install_venv.run_command(pcmd)
             print "done."
     except:
         print "You must be root or install fakeroot"
