@@ -11,8 +11,10 @@ CONFIG_PATH = path.abspath('/etc/quantum')
 BASE_PACKAGES = ['common', 'server', 'client']
 PLUGINS = ['plugins/sample-plugin']
 
-HAS_ALIEN = bool(install_venv.run_command(['which', 'alien']))
-HAS_FAKEROOT = bool(install_venv.run_command(['which', 'fakeroot']))
+HAS_ALIEN = bool(install_venv.run_command(['which', 'alien'],
+                                          check_exit_code=False))
+HAS_FAKEROOT = bool(install_venv.run_command(['which', 'fakeroot'],
+                                             check_exit_code=False))
 
 
 def clean_path(dirty):
