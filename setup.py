@@ -54,7 +54,7 @@ def install_packages(options, args=None):
             print "Virtual-env exists"
         else:
             install_venv.create_virtualenv(no_pip=True)
-            install_venv.install_dependencies()
+        install_venv.install_dependencies()
         cmd.extend(['-E', install_venv.VENV])
     elif options.user:
         cmd.append('--user')
