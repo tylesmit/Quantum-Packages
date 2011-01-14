@@ -209,7 +209,7 @@ def find_config_file(options, args):
     config_file_dirs = [fix_path(os.getcwd()),
                         fix_path(os.path.join('~', '.quantum')),
                         fix_path(os.path.join('~', '.quantum-venv', 'etc',
-                                 '.quantum')),
+                                 'quantum')),
                         fix_path('~'),
                         os.path.join(FLAGS.state_path, 'etc'),
                         os.path.join(FLAGS.state_path, 'etc', 'quantum'),
