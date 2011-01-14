@@ -77,15 +77,13 @@ def check_dependencies():
     print 'done.'
 
 
-def create_virtualenv(venv=VENV, site_packages=False, no_pip=False):
+def create_virtualenv(venv=VENV, no_pip=False):
     """Creates the virtual environment and installs PIP only into the
     virtual environment
     """
     print 'Creating venv...',
 
     install = ['virtualenv', '-q', venv]
-    if not site_packages:
-        install.insert(2, '--no-site-packages')
     run_command(install)
 
     print 'done.'

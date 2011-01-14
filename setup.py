@@ -11,11 +11,16 @@ CONFIG_PATH = path.abspath('/etc/quantum')
 BASE_PACKAGES = ['common', 'server', 'client']
 PLUGINS = ['plugins/sample-plugin']
 
-HAS_ALIEN = bool(install_venv.run_command(['which', 'alien'],
-                                          check_exit_code=False))
-HAS_FAKEROOT = bool(install_venv.run_command(['which', 'fakeroot'],
-                                             check_exit_code=False))
 
+def check_deb_build_dependencies():
+    alien = bool(install_venv.run_command(['which', 'alien'],
+                                          check_exit_code=False))
+    fakeroot = bool(install_venv.run_command(['which', 'fakeroot'],
+                                             check_exit_code=False))
+    if not alien:
+        raise Exception("You must have alien installed to build debs")
+
+    return (alien, fakeroot)
 
 def clean_path(dirty):
     """Makes sure path delimiters are OS compliant"""
@@ -105,8 +110,9 @@ def build_packages(options, args=None):
         return
 
     # Use alient to build debs from the rpms
+    alien, fakeroot = check_deb_build_dependencies()
     cmd = ['tools/build_debs.sh']
-    if HAS_FAKEROOT:
+    if fakeroot:
         cmd.insert(0, 'fakeroot')
     try:
         for p in BASE_PACKAGES + PLUGINS:
