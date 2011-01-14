@@ -35,7 +35,7 @@ PackageData = {
 
 config_path = '/etc/quantum/'
 
-relative_locations = ['bdist_egg', '--user', '--virtualenv', '--venv']
+relative_locations = ['--user', '--virtualenv', '--venv']
 if [x for x in relative_locations if x in relative_locations]:
     config_path = 'etc/quantum/'
 
