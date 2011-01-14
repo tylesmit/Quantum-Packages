@@ -65,15 +65,8 @@ def check_dependencies():
     """Make sure virtualenv is in the path."""
 
     if not HAS_VIRTUALENV:
-        print 'not found.'
-        # Try installing it via easy_install...
-        if HAS_EASY_INSTALL:
-            print 'Installing virtualenv via easy_install...',
-            if not run_command(['which', 'easy_install']):
-                die('ERROR: virtualenv not found.\n\n'
-                    'Quantum requires virtualenv, please install'
-                    ' it using your favorite package management tool')
-            print 'done.'
+        raise Expception('Virtualenv not found. ' + \
+                         'Try installing python-virtualenv')
     print 'done.'
 
 

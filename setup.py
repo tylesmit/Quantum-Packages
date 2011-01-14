@@ -41,22 +41,6 @@ def create_parser():
     return (options, cmd, args)
 
 
-def uninstall_packages(options, args=None):
-    """Removes packages"""
-    cmd = ['pip', 'uninstall', '-y']
-
-    for package in ['quantum-' + x.split('/')[-1] \
-                    for x in BASE_PACKAGES + PLUGINS]:
-        print "Uninstalling %s" % package
-        # Each package needs its own command list, and it needs the path
-        # in the correct place (after "pip uninstall"
-        pcmd = deepcopy(cmd)
-        pcmd.insert(2, package)
-        print pcmd
-        install_venv.run_command(pcmd)
-        print "done."
-
-
 def install_packages(options, args=None):
     """Builds and installs packages"""
     # Start building a command list
@@ -83,6 +67,22 @@ def install_packages(options, args=None):
         # in the correct place (after "pip install")
         pcmd = deepcopy(cmd)
         pcmd.insert(2, path.join(ROOT, clean_path(package)))
+        print pcmd
+        install_venv.run_command(pcmd)
+        print "done."
+
+
+def uninstall_packages(options, args=None):
+    """Removes packages"""
+    cmd = ['pip', 'uninstall', '-y']
+
+    for package in ['quantum-' + x.split('/')[-1] \
+                    for x in BASE_PACKAGES + PLUGINS]:
+        print "Uninstalling %s" % package
+        # Each package needs its own command list, and it needs the path
+        # in the correct place (after "pip uninstall"
+        pcmd = deepcopy(cmd)
+        pcmd.insert(2, package)
         print pcmd
         install_venv.run_command(pcmd)
         print "done."
