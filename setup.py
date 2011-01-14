@@ -135,7 +135,10 @@ def main():
     options, cmd, args = create_parser()
 
     # Execute command
-    globals()["%s_packages" % cmd](options, args)
+    try:
+        globals()["%s_packages" % cmd](options, args)
+    except KeyError as exc:
+        print "Command %s' not found" % exc.__str__().split('_')[0]
 
 if __name__ == "__main__":
     main()

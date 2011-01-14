@@ -65,7 +65,7 @@ def check_dependencies():
     """Make sure virtualenv is in the path."""
 
     if not HAS_VIRTUALENV:
-        raise Expception('Virtualenv not found. ' + \
+        raise Exception('Virtualenv not found. ' + \
                          'Try installing python-virtualenv')
     print 'done.'
 
