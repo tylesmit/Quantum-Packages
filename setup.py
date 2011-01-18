@@ -106,7 +106,7 @@ def build_packages(options, args=None):
         print "done."
 
     # If we're only building rpms we're done
-    if args is 'rpm':
+    if args[0] is 'rpm':
         return
 
     # Use alient to build debs from the rpms
