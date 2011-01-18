@@ -109,7 +109,7 @@ def build_packages(options, args=None):
     if args[0] is 'rpm':
         return
 
-    # Use alient to build debs from the rpms
+    # Use alien to build debs from the rpms
     alien, fakeroot = check_deb_build_dependencies()
     cmd = ['tools/build_debs.sh']
     if fakeroot:

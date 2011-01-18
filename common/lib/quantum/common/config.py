@@ -217,6 +217,7 @@ def find_config_file(options, args):
                             '..', 'server', 'etc'),
                         fix_path(os.path.join('~', '.local',
                                               'etc', 'quantum')),
+                        '/usr/etc/quantum',
                         '/usr/local/etc/quantum',
                         '/etc/quantum/',
                         '/etc']
