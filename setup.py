@@ -92,9 +92,9 @@ def build_packages(options, args=None):
     """Build RPM and/or deb packages"""
     # If we weren't given a package type, default to rpm
     if not args:
-        args = 'rpm'
-    if args not in ['rpm', 'deb', 'all']:
-        print "arg must be rpm, deb, or all"
+        args = ['rpm']
+    if args[0] not in ['rpm', 'deb', 'all']:
+        raise Exception("Packge type must be rpm, deb, or all")
 
     # Since we need to cd to build rpms, we call this sh script
     cmd = ['tools/build_rpms.sh']

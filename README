@@ -27,13 +27,13 @@ To use:
 
 -------------------------------------------------------------------------------
 
-To build rpms:
+To build rpms: (Note: requires rpmbuild)
 
 	python setup.py build rpm
 
 -------------------------------------------------------------------------------
 
-To build debs:
+To build debs: (Note: For now, requires rpmbuild and alien)
 
 	python setup.py build deb
 
