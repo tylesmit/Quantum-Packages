@@ -290,11 +290,11 @@ if __name__ == '__main__':
     logger.addHandler(hdlr)
     logger.setLevel(logging.DEBUG)
 
-    working_dir = os.path.abspath("tests")
     c = config.Config(stream=sys.stdout,
                       env=os.environ,
                       verbosity=3,
-                      workingDir=working_dir)
+                      includeExe=True,
+                      traverseNamespace=True)
     runner = QuantumTestRunner(stream=c.stream,
                             verbosity=c.verbosity,
                             config=c)

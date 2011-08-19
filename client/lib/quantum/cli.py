@@ -340,7 +340,7 @@ def build_args(cmd, cmdargs, arglist):
     return args
 
 
-if __name__ == "__main__":
+def main():
     usagestr = "Usage: %prog [OPTIONS] <command> [args]"
     parser = OptionParser(usage=usagestr)
     parser.add_option("-l", "--load-plugin", dest="load_plugin",
