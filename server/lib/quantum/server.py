@@ -47,15 +47,15 @@ def create_options(parser):
     config.add_log_options(parser)
 
 
-if __name__ == '__main__':
+def main():
     oparser = optparse.OptionParser(version='%%prog VERSION')
     create_options(oparser)
     (options, args) = config.parse_options(oparser)
 
     try:
-        service = service.serve_wsgi(service.QuantumApiService,
+        quantum_service = service.serve_wsgi(service.QuantumApiService,
                                      options=options,
                                      args=args)
-        service.wait()
+        quantum_service.wait()
     except RuntimeError, e:
         sys.exit("ERROR: %s" % e)
