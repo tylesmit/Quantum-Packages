@@ -72,6 +72,8 @@ from nose import config
 from nose import result
 from nose import core
 
+import quantum.tests.unit
+
 
 class _AnsiColorizer(object):
     """
@@ -281,7 +283,7 @@ class QuantumTestRunner(core.TextTestRunner):
                               self.config)
 
 
-if __name__ == '__main__':
+def main():
     # Set up test logger.
     logger = logging.getLogger()
     hdlr = logging.StreamHandler()
@@ -295,6 +297,8 @@ if __name__ == '__main__':
                       verbosity=3,
                       includeExe=True,
                       traverseNamespace=True)
+    c.configureWhere(quantum.tests.unit.__path__)
+
     runner = QuantumTestRunner(stream=c.stream,
                             verbosity=c.verbosity,
                             config=c)

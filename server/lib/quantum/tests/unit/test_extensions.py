@@ -17,7 +17,7 @@ import json
 import os.path
 import routes
 import unittest
-from tests.unit import BaseTest
+from quantum.tests.unit import BaseTest
 from webtest import TestApp
 
 
