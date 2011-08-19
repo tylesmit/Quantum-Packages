@@ -21,10 +21,9 @@ import os
 
 from quantum.plugins.cisco.common import cisco_configparser as confp
 
-CONF_FILE = "conf/l2network_plugin.ini"
+CONF_FILE = "/etc/quantum/plugins/cisco/l2network_plugin.ini"
 
-cp = confp.CiscoConfigParser(os.path.dirname(os.path.realpath(__file__)) \
-                             + "/" + CONF_FILE)
+cp = confp.CiscoConfigParser(os.path.realpath(CONF_FILE))
 
 section = cp['VLANS']
 VLAN_NAME_PREFIX = section['vlan_name_prefix']
@@ -43,8 +42,7 @@ MAX_NETWORKS = section['max_networks']
 section = cp['MODEL']
 MODEL_CLASS = section['model_class']
 
-CONF_FILE = "conf/plugins.ini"
+CONF_FILE = "/etc/quantum/plugins/cisco/plugins.ini"
 
-cp = confp.CiscoConfigParser(os.path.dirname(os.path.realpath(__file__)) \
-                             + "/" + CONF_FILE)
+cp = confp.CiscoConfigParser(os.path.realpath(CONF_FILE))
 plugins = cp.walk(cp.dummy)
