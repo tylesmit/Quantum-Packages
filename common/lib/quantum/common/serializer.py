@@ -1,5 +1,7 @@
 from xml.dom import minidom
 
+from quantum.common import utils
+
 class Serializer(object):
     """Serializes and deserializes dictionaries to certain MIME types."""
 

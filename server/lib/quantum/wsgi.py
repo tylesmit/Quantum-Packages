@@ -32,6 +32,7 @@ from xml.dom import minidom
 
 from quantum.common import exceptions as exception
 from quantum.common import utils
+from quantum.common.serializer import Serializer
 
 
 LOG = logging.getLogger('quantum.wsgi')
