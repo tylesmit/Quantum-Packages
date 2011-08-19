@@ -14,4 +14,5 @@ clean.sh
 common/build
 client/build
 server/build
+*-plugin/build
 *.egg-info
