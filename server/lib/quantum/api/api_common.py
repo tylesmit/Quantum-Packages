@@ -19,7 +19,7 @@ import logging
 
 from webob import exc
 
-from quantum.common import wsgi
+from quantum import wsgi
 
 XML_NS_V01 = 'http://netstack.org/quantum/api/v0.1'
 XML_NS_V10 = 'http://netstack.org/quantum/api/v1.0'

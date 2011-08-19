@@ -20,7 +20,6 @@ import logging
 import unittest
 import re
 
-from quantum.common.wsgi import Serializer
 from quantum.client import Client
 
 LOG = logging.getLogger('quantum.tests.test_api')

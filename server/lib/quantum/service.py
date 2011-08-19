@@ -17,7 +17,7 @@
 
 import logging
 from quantum.common import config
-from quantum.common import wsgi
+from quantum import wsgi
 from quantum.common import exceptions as exception
 
 

@@ -24,7 +24,7 @@ import urllib
 
 from quantum.manager import QuantumManager
 from optparse import OptionParser
-from quantum.common.wsgi import Serializer
+from quantum.common.serializer import Serializer
 from quantum.cli import MiniClient
 
 FORMAT = "json"

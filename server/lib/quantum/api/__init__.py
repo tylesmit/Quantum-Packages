@@ -29,7 +29,7 @@ from quantum.api import faults
 from quantum.api import networks
 from quantum.api import ports
 from quantum.common import flags
-from quantum.common import wsgi
+from quantum import wsgi
 
 
 LOG = logging.getLogger('quantum.api')

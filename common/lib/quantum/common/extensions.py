@@ -27,7 +27,7 @@ from gettext import gettext as _
 from abc import ABCMeta
 from quantum.common import exceptions
 from quantum.manager import QuantumManager
-from quantum.common import wsgi
+from quantum import wsgi
 
 LOG = logging.getLogger('quantum.common.extensions')
 

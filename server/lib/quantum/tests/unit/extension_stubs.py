@@ -16,7 +16,7 @@
 from abc import  abstractmethod
 
 from quantum.common import extensions
-from quantum.common import wsgi
+from quantum import wsgi
 
 
 class StubExtension(object):

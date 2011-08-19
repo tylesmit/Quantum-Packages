@@ -21,11 +21,11 @@ from tests.unit import BaseTest
 from webtest import TestApp
 
 
-from quantum.common import wsgi
+from quantum import wsgi
 from quantum.common import config
 from quantum.common import extensions
 from quantum.plugins.SamplePlugin import QuantumEchoPlugin
-from tests.unit.extension_stubs import (StubExtension, StubPlugin,
+from quantum.tests.unit.extension_stubs import (StubExtension, StubPlugin,
                                         StubPluginInterface,
                                         StubBaseAppController,
                                         ExtensionExpectingPluginInterface)

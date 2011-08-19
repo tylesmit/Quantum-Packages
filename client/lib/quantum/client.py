@@ -19,7 +19,7 @@
 import httplib
 import socket
 import urllib
-from quantum.common.wsgi import Serializer
+from quantum.common.serializer import Serializer
 
 
 class api_call(object):

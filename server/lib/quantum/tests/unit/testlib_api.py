@@ -1,6 +1,6 @@
 import webob
 
-from quantum.common.wsgi import Serializer
+from quantum.common.serializer import Serializer
 
 
 def create_request(path, body, content_type, method='GET'):

@@ -24,9 +24,9 @@ import socket
 import sys
 import urllib
 
-from manager import QuantumManager
 from optparse import OptionParser
-from client import Client
+from quantum.manager import QuantumManager
+from quantum.client import Client
 
 FORMAT = "json"
 

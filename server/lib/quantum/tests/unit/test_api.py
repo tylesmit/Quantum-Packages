@@ -21,10 +21,10 @@ import logging
 import unittest
 
 
-import tests.unit.testlib_api as testlib
+import quantum.tests.unit.testlib_api as testlib
 from quantum import api as server
 from quantum.db import api as db
-from quantum.common.wsgi import Serializer
+from quantum.common.serializer import Serializer
 
 
 LOG = logging.getLogger('quantum.tests.test_api')
