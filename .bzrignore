@@ -9,3 +9,9 @@ ChangeLog
 *.log
 quantum/vcsversion.py
 .ropeproject
+build.sh
+clean.sh
+common/build
+client/build
+server/build
+*.egg-info
