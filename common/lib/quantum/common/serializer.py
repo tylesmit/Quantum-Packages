@@ -1,4 +1,5 @@
 from xml.dom import minidom
+import webob.exc
 
 from quantum.common import utils
 
