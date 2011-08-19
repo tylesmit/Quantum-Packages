@@ -1,0 +1,61 @@
+Provides a deb, egg, and rpm packaging for quantum.  It provides 3 packages:
+
+quantum-common
+quantum-server
+quantum-client
+
+To install, install quantum-common first, then either of the next two.
+
+To use the pre-built rpms:
+
+        sudo rpm -i bin/quantum-common*.rpm
+        sudo rpm -i bin/quantum-server*.rpm
+        sudo rpm -i bin/quantum-client*.rpm
+
+To use:
+
+    > quantum
+    Will start the server
+
+    > quantum_cli list_nets totore
+    Will list networks on the server
+
+    > quantum_tests
+    Will run the quantum tests
+
+
+To verify installation, run the command 'quantum', and in another window run the command 'quantum_cli list_nets tenant-id'.
+
+
+
+
+-------------------------------------------------------------------------------
+
+To install directly from source:
+
+        sudo python setup.py install
+
+-------------------------------------------------------------------------------
+
+To build and install rpms:
+
+	python setup.py bdist_rpm
+	su -c 'rpm -i dist/quantum*.rpm'
+
+-------------------------------------------------------------------------------
+
+To build and install eggs:
+
+	python setup.py bdist_egg
+	sudo easy_install dist/quantum_*.egg
+
+
+-------------------------------------------------------------------------------
+
+Verify installation:
+
+	Start Quantum server
+	>> python
+	>>>> from quantum.client import Client
+	>>>> c = Client('127.0.0.1'), 9696, False, 'tenant-id', 'json')
+	>>>> print c.list_networks()
