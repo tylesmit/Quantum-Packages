@@ -29,8 +29,8 @@ import os
 import logging
 gettext.install('quantum', unicode=1)
 
-from common import utils
-from quantum_plugin_base import QuantumPluginBase
+from quantum.common import utils
+from quantum.quantum_plugin_base import QuantumPluginBase
 
 LOG = logging.getLogger('quantum.manager')
 CONFIG_FILE = "plugins.ini"
@@ -50,8 +50,16 @@ class QuantumManager(object):
 
     def __init__(self, options=None, config_file=None):
         if config_file == None:
-            self.configuration_file = find_config(
-                os.path.abspath(os.path.dirname(__file__)))
+            fix_path = lambda p: os.path.abspath(os.path.expanduser(p))
+            config_file_dirs = [fix_path(os.getcwd()),
+                        fix_path(os.path.join('~', '.quantum')),
+                        fix_path('~'),
+                        '/etc/quantum/',
+                        '/etc']
+            for cfg_dir in config_file_dirs:
+                cfg_file = os.path.join(cfg_dir, CONFIG_FILE)
+                if os.path.exists(cfg_file):
+                    self.configuration_file = cfg_file
         else:
             self.configuration_file = config_file
         # If no options have been provided, create an empty dict
