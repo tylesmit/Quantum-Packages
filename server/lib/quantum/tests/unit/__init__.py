@@ -17,6 +17,12 @@
 
 # See http://code.google.com/p/python-nose/issues/detail?id=373
 # The code below enables nosetests to work with i18n _() blocks
+try:
+    __import__('pkg_resources').declare_namespace(__name__)
+except ImportError:
+    from pkgutil import extend_path
+    __path__ = extend_path(__path__, __name__)
+
 import __builtin__
 import unittest
 setattr(__builtin__, '_', lambda x: x)
