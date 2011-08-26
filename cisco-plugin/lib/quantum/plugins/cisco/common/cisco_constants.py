@@ -1,3 +1,4 @@
+"""
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 #
 # Copyright 2011 Cisco Systems, Inc.  All rights reserved.
@@ -16,12 +17,28 @@
 #
 # @author: Sumit Naiksatam, Cisco Systems, Inc.
 #
+"""
 
 PLUGINS = 'PLUGINS'
 
 PORT_STATE = 'port-state'
-PORT_UP = "UP"
+PORT_UP = "ACTIVE"
 PORT_DOWN = "DOWN"
+
+UUID = 'uuid'
+TENANTID = 'tenant_id'
+NETWORKID = 'network_id'
+NETWORKNAME = 'name'
+NETWORKPORTS = 'ports'
+INTERFACEID = 'interface_id'
+PORTSTATE = 'state'
+PORTID = 'port_id'
+PPNAME = 'name'
+PPVLANID = 'vlan_id'
+PPQOS = 'qos'
+PPID = 'portprofile_id'
+PPDEFAULT = 'default'
+VLANID = 'vlan_id'
 
 ATTACHMENT = 'attachment'
 PORT_ID = 'port-id'
@@ -41,22 +58,22 @@ TENANT_QOS_LEVELS = 'tenant-qos-levels'
 TENANT_CREDENTIALS = 'tenant-credentials'
 
 PORT_PROFILE = 'port-profile'
-PROFILE_ID = 'profile-id'
-PROFILE_NAME = 'profile-name'
+PROFILE_ID = 'profile_id'
+PROFILE_NAME = 'profile_name'
 PROFILE_VLAN_NAME = 'profile-vlan-name'
 PROFILE_VLAN_ID = 'vlan-id'
-PROFILE_QOS = 'profile-qos'
+PROFILE_QOS = 'qos_name'
 PROFILE_ASSOCIATIONS = 'assignment'
 
-QOS_LEVEL_ID = 'qos-id'
-QOS_LEVEL_NAME = 'qos-name'
+QOS_LEVEL_ID = 'qos_id'
+QOS_LEVEL_NAME = 'qos_name'
 QOS_LEVEL_ASSOCIATIONS = 'qos-level-associations'
-QOS_LEVEL_DESCRIPTION = 'qos-desc'
+QOS_LEVEL_DESCRIPTION = 'qos_desc'
 
-CREDENTIAL_ID = 'credential-id'
-CREDENTIAL_NAME = 'credential-name'
-CREDENTIAL_USERNAME = 'credential-username'
-CREDENTIAL_PASSWORD = 'credential-password'
+CREDENTIAL_ID = 'credential_id'
+CREDENTIAL_NAME = 'credential_name'
+CREDENTIAL_USERNAME = 'user_name'
+CREDENTIAL_PASSWORD = 'password'
 MASKED_PASSWORD = '********'
 
 USERNAME = 'username'
@@ -101,3 +118,15 @@ PLUGIN_OBJ_REF = 'plugin-obj-ref'
 PARAM_LIST = 'param-list'
 
 DEVICE_IP = 'device-ip'
+
+NO_VLAN_ID = 0
+
+HOST_LIST = 'host_list'
+HOST_1 = 'host_1'
+
+VIF_DESC = 'vif_desc'
+DEVICENAME = 'device'
+UCSPROFILE = 'portprofile'
+
+MAX_CREDENTIALS = 65568
+MAX_QOS_LEVELS = 1024

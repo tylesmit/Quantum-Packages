@@ -1,3 +1,4 @@
+"""
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 #
 # Copyright 2011 Cisco Systems, Inc.  All rights reserved.
@@ -16,45 +17,53 @@
 #
 # @author: Sumit Naiksatam, Cisco Systems, Inc.
 #
+"""
 
 import logging as LOG
 import os
 
-from quantum.plugins.cisco.common import cisco_constants as const
 from quantum.plugins.cisco.common import cisco_configparser as confp
+from quantum.plugins.cisco.common import cisco_constants as const
 
 LOG.basicConfig(level=LOG.WARN)
 LOG.getLogger(const.LOGGER_COMPONENT_NAME)
 
-CREDENTIALS_FILE = "../conf/credentials.ini"
+CREDENTIALS_FILE = "/etc/quantum/plugins/cisco/credentials.ini"
 
-cp = confp.CiscoConfigParser(os.path.dirname(os.path.realpath(__file__)) \
-                             + "/" + CREDENTIALS_FILE)
+cp = confp.CiscoConfigParser(CREDENTIALS_FILE)
 _creds_dictionary = cp.walk(cp.dummy)
 
 
 class Store(object):
+    """Credential Store"""
+
     @staticmethod
     def putCredential(id, username, password):
+        """Set the username and password"""
         _creds_dictionary[id] = {const.USERNAME: username,
-                                 const.PASSWORD: password}
+                                const.PASSWORD: password}
 
     @staticmethod
     def getUsername(id):
+        """Get the username"""
         return _creds_dictionary[id][const.USERNAME]
 
     @staticmethod
     def getPassword(id):
+        """Get the password"""
         return _creds_dictionary[id][const.PASSWORD]
 
     @staticmethod
     def getCredential(id):
+        """Get the username and password"""
         return _creds_dictionary[id]
 
     @staticmethod
     def getCredentials():
+        """Get all usernames and passwords"""
         return _creds_dictionary
 
     @staticmethod
     def deleteCredential(id):
+        """Delete a credential"""
         return _creds_dictionary.pop(id)

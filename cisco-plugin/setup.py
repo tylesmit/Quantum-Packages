@@ -34,7 +34,7 @@ PackageData = {
 DataFiles = [
         ('/etc/quantum/plugins/cisco',
 	['etc/credentials.ini','etc/l2network_plugin.ini','etc/nexus.ini',
-    'etc/ucs.ini', 'etc/nova.ini', 'etc/plugins.ini'])
+    'etc/ucs.ini', 'etc/nova.ini', 'etc/plugins.ini', 'etc/db_conn.ini'])
 ]
 
 setup(
