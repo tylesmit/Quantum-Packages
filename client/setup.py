@@ -49,7 +49,7 @@ setup(
     namespace_packages = ['quantum'],
     entry_points={
         'console_scripts' : [
-            'quantum_cli = quantum.cli:main'
+            'quantum = quantum.cli:main'
         ]
     },
 )

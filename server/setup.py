@@ -59,7 +59,7 @@ setup(
     namespace_packages = ['quantum'],
     entry_points={
         'console_scripts' : [
-            'quantum = quantum.server:main'
+            'quantum-server = quantum.server:main'
         ]
     },
 )

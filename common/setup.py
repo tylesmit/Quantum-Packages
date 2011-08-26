@@ -59,7 +59,7 @@ setup(
     namespace_packages = ['quantum'],
     entry_points={
         'console_scripts' : [
-            'quantum_tests = quantum.run_tests:main'
+            'quantum-tests = quantum.run_tests:main'
         ]
     },
 )
