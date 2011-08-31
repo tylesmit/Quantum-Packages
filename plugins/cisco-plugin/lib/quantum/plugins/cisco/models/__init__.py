@@ -18,19 +18,3 @@
 # @author: Sumit Naiksatam, Cisco Systems, Inc.
 #
 """
-
-import os
-
-from quantum.plugins.cisco.common import cisco_configparser as confp
-
-CONF_FILE = "/etc/quantum/plugins/cisco/nova.ini"
-
-CP = confp.CiscoConfigParser(CONF_FILE)
-
-SECTION = CP['NOVA']
-DB_SERVER_IP = SECTION['db_server_ip']
-DB_NAME = SECTION['db_name']
-DB_USERNAME = SECTION['db_username']
-DB_PASSWORD = SECTION['db_password']
-NOVA_HOST_NAME = SECTION['nova_host_name']
-NOVA_PROJ_NAME = SECTION['nova_proj_name']

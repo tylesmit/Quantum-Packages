@@ -49,6 +49,10 @@ MODEL_CLASS = SECTION_CONF['model_class']
 
 CONF_FILE = "/etc/quantum/plugins/cisco/plugins.ini"
 
+SECTION_CONF = CONF_PARSER_OBJ['SEGMENTATION']
+MANAGER_CLASS = SECTION_CONF['manager_class']
+
+
 CONF_PARSER_OBJ = confp.CiscoConfigParser(CONF_FILE)
 
 """
