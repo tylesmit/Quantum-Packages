@@ -5,14 +5,14 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-Name='quantum-cisco-plugin'
+Name='quantum-openvswitch-plugin'
 ProjecUrl=""
 Version='0.1'
 License='Apache License 2.0'
-Author='Tyler Smith'
-AuthorEmail='tylesmit@cisco.com'
+Author=''
+AuthorEmail=''
 Maintainer=''
-Summary='Sample plugin for Quantum'
+Summary='OpenVSwitch plugin for Quantum'
 ShortDescription=Summary
 Description=Summary
 
@@ -32,9 +32,8 @@ PackageData = {
 }
 
 DataFiles = [
-        ('/etc/quantum/plugins/cisco',
-	['etc/credentials.ini','etc/l2network_plugin.ini','etc/nexus.ini',
-    'etc/ucs.ini', 'etc/nova.ini', 'etc/plugins.ini', 'etc/db_conn.ini'])
+        ('/etc/quantum/plugins/openvswitch',
+	['etc/ovs_quantum_plugin.ini'])
 ]
 
 setup(
@@ -54,9 +53,4 @@ setup(
     package_dir = {'': 'lib'},
     eager_resources = EagerResources,
     namespace_packages = ['quantum'],
-    entry_points={
-        'console_scripts' : [
-            'quantum_cisco_tests = quantum.plugins.cisco.run_tests:main'
-        ]
-    },
 )

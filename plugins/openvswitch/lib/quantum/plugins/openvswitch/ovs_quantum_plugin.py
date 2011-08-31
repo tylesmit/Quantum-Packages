@@ -29,7 +29,7 @@ from quantum.quantum_plugin_base import QuantumPluginBase
 import quantum.db.api as db
 import ovs_db
 
-CONF_FILE = "ovs_quantum_plugin.ini"
+CONF_FILE = "/etc/quantum/plugins/openvswitch/ovs_quantum_plugin.ini"
 
 LOG.basicConfig(level=LOG.WARN)
 LOG.getLogger("ovs_quantum_plugin")
