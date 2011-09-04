@@ -29,7 +29,7 @@ import sys
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-VENV = os.path.expanduser('~/quantum-venv')
+VENV = os.path.expanduser('~/.quantum-venv')
 VENV_EXISTS = bool(os.path.exists(VENV))
 PIP_REQUIRES = os.path.join(ROOT, 'tools', 'pip-requires')
 
