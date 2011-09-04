@@ -34,7 +34,9 @@ PackageData = {
 }
 
 config_path = '/etc/quantum/'
-if '--user' in sys.argv:
+
+relative_locations = ['--user', '--virtualenv', '--venv']
+if [x for x in relative_locations if x in relative_locations]:
     config_path = 'etc/quantum/'
 
 DataFiles = [

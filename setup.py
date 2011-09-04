@@ -18,9 +18,8 @@ def clean_path(dirty):
 def create_parser():
     usagestr = "Usage: %prog [OPTIONS] <command> [args]"
     parser = OptionParser(usage=usagestr)
-    parser.add_option("-V", "--virtualenv", "--virtual-env", "--venv",
-        dest="venv", type="string", default="",
-        help="Install to the given virtual env")
+    parser.add_option("-V", "--virtualenv", "--venv", dest="venv",
+        action="store_true", default=False, help="Install to a virtual-env")
     parser.add_option("-U", "--user", dest="user", action="store_true",
         default=False, help="Install to users's home")
     return parser.parse_args()
@@ -44,23 +43,29 @@ def uninstall_packages(options):
         print "done."
 
 def install_packages(options):
+    """Builds and installs packages"""
+    # Start building a command list
     cmd = ['pip', 'install']
 
-    # Get Python lib
-    lib_re = re.compile('^/usr/lib/python[0-9]\.[0-9]$')
-    if options.user:
-        lib_re = re.compile('^/usr/local/lib/python[0-9]\.[0-9]/dist-packages$')
-
-    lib_path = [x for x in sys.path if lib_re.match(x)][0]
-    if options.user:
+    # If no options, just a regular install.  If venv, create, prepare and
+    # install in venv.  If --user install in user's local dir.  Usually
+    # ~/.local/
+    if options.venv:
+        if install_venv.VENV_EXISTS:
+            print "Virtual-env exists"
+        else:
+            install_venv.create_virtualenv(no_pip=True)
+            install_venv.install_dependencies()
+        cmd.extend(['-E', install_venv.VENV])
+    elif options.user:
         cmd.append('--user')
-        #cmd.append("--install-option=--install-scripts=/usr/local/bin")
-        #cmd.append("--install-option=--install-lib='%s" % lib_path)
 
+    # Install packages
+    # TODO(Tyler) allow users to pass in packages in cli
     for p in BASE_PACKAGES:
         print "Installing %s" % p
         # Each package needs its own command list, and it needs the path
-        # in the correct place (after "pip install"
+        # in the correct place (after "pip install")
         pcmd = deepcopy(cmd)
         pcmd.insert(2, path.join(ROOT, clean_path(p)))
         print pcmd

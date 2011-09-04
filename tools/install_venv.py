@@ -29,7 +29,8 @@ import sys
 
 
 ROOT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-VENV = os.path.join(ROOT, '.quantum-venv')
+VENV = os.path.expanduser('~/quantum-venv')
+VENV_EXISTS = bool(os.path.exists(VENV))
 PIP_REQUIRES = os.path.join(ROOT, 'tools', 'pip-requires')
 
 
@@ -75,7 +76,7 @@ def check_dependencies():
     print 'done.'
 
 
-def create_virtualenv(venv=VENV, site_packages=False):
+def create_virtualenv(venv=VENV, site_packages=False, no_pip=False):
     """Creates the virtual environment and installs PIP only into the
     virtual environment
     """
@@ -88,7 +89,7 @@ def create_virtualenv(venv=VENV, site_packages=False):
 
     print 'done.'
     print 'Installing pip in virtualenv...',
-    if not run_command(['tools/with_venv.sh', 'easy_install', 'pip']).strip():
+    if not no_pip and run_command(['tools/with_venv.sh', 'easy_install', 'pip']):
         die("Failed to install pip.")
     print 'done.'
 
@@ -98,12 +99,11 @@ def install_dependencies(venv=VENV):
 
     # Install greenlet by hand - just listing it in the requires file does not
     # get it in stalled in the right order
-    venv_tool = 'tools/with_venv.sh'
-    run_command([venv_tool, 'pip', 'install', '-E', venv, '-r', PIP_REQUIRES],
-                redirect_output=False)
+    run_command(['tools/with_venv.sh', 'pip', 'install', '-E', venv,
+        '-r', PIP_REQUIRES], redirect_output=False)
 
     # Tell the virtual env how to "import quantum"
-    pthfile = os.path.join(venv, "lib", "python2.6", "site-packages",
+    pthfile = os.path.join(venv, "lib", "python2.7", "site-packages",
                                  "quantum.pth")
     f = open(pthfile, 'w')
     f.write("%s\n" % ROOT)
