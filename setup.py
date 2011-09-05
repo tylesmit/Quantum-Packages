@@ -8,7 +8,7 @@ from tools import install_venv
 
 ROOT = path.abspath(path.dirname(__file__))
 CONFIG_PATH = path.abspath('/etc/quantum')
-BASE_PACKAGES = ['common', 'server', 'client',]
+BASE_PACKAGES = ['common', 'server', 'client']
 PLUGINS = ['plugins/sample-plugin']
 
 HAS_ALIEN = bool(install_venv.run_command(['which', 'alien']))
@@ -19,7 +19,9 @@ def clean_path(dirty):
     """Makes sure path delimiters are OS compliant"""
     return path.join(*dirty.split('/'))
 
+
 def create_parser():
+    """Setup the option parser"""
     usagestr = "Usage: %prog [OPTIONS] <command> [args]"
     parser = OptionParser(usage=usagestr)
     parser.add_option("-V", "--virtualenv", "--venv", dest="venv",
@@ -31,25 +33,23 @@ def create_parser():
     args = args[1:]
     return (options, cmd, args)
 
-def source_venv(venv):
-    print ['source', path.join(venv,'bin','activate')] 
-    return install_venv.run_command(['source',
-        path.join(venv, 'bin', 'activate')])
 
-def uninstall_packages(options, args):
+def uninstall_packages(options, args=None):
+    """Removes packages"""
     cmd = ['pip', 'uninstall', '-y']
 
-    for p in ['quantum-'+x.split('/')[-1] for x in BASE_PACKAGES+PLUGINS]:
-        print "Uninstalling %s" % p
+    for package in ['quantum-' + x.split('/')[-1] for x in BASE_PACKAGES + PLUGINS]:
+        print "Uninstalling %s" % package
         # Each package needs its own command list, and it needs the path
         # in the correct place (after "pip uninstall"
         pcmd = deepcopy(cmd)
-        pcmd.insert(2, p)
+        pcmd.insert(2, package)
         print pcmd
         install_venv.run_command(pcmd)
         print "done."
 
-def install_packages(options, args):
+
+def install_packages(options, args=None):
     """Builds and installs packages"""
     # Start building a command list
     cmd = ['pip', 'install']
@@ -69,27 +69,29 @@ def install_packages(options, args):
 
     # Install packages
     # TODO(Tyler) allow users to pass in packages in cli
-    for p in BASE_PACKAGES+PLUGINS:
-        print "Installing %s" % p
+    for package in BASE_PACKAGES + PLUGINS:
+        print "Installing %s" % package
         # Each package needs its own command list, and it needs the path
         # in the correct place (after "pip install")
         pcmd = deepcopy(cmd)
-        pcmd.insert(2, path.join(ROOT, clean_path(p)))
+        pcmd.insert(2, path.join(ROOT, clean_path(package)))
         print pcmd
         install_venv.run_command(pcmd)
         print "done."
 
-def build_packages(options, args):
+
+def build_packages(options, args=None):
+    """Build RPM and/or deb packages"""
     if not args:
         args = 'rpm'
     if args not in ['rpm', 'deb', 'all']:
         print "arg must be rpm, deb, or all"
 
     cmd = ['tools/build_rpms.sh']
-    for p in BASE_PACKAGES+PLUGINS:
-        print "Building %s rpm" % p
+    for package in BASE_PACKAGES + PLUGINS:
+        print "Building %s rpm" % package
         pcmd = deepcopy(cmd)
-        pcmd.append(p)
+        pcmd.append(package)
         #install_venv.run_command(pcmd)
         print "done."
 
@@ -100,7 +102,7 @@ def build_packages(options, args):
     if HAS_FAKEROOT:
         cmd.insert(0, 'fakeroot')
     try:
-        for p in BASE_PACKAGES+PLUGINS:
+        for p in BASE_PACKAGES + PLUGINS:
             print "Building %s deb" % p
             pcmd = deepcopy(cmd)
             pcmd.append(p)
@@ -111,12 +113,14 @@ def build_packages(options, args):
     #cmd = ['cp', './server/*.deb', ROOT+'/']
     #install_venv.run_command(cmd)
 
+
 def main():
+    """Main Build script for Quantum"""
     print "Checking for virtual-env and easy_install"
     install_venv.check_dependencies()
 
     options, cmd, args = create_parser()
-    
+
     # Execute command
     globals()["%s_packages" % cmd](options, args)
 
