@@ -1,53 +1,41 @@
-Provides a deb, egg, and rpm packaging for quantum.  It provides 3 packages:
+Provides debian and rpm packaging for quantum.  It provides 3 packages:
 
 quantum-common
 quantum-server
 quantum-client
 
-To install, install quantum-common first, then either of the next two.
+As well as some plugins.
 
-To use the pre-built rpms:
+To install, you have a few options:
+    "sudo python setup.py install" - Installs into /usr/lib, /usr/bin, etc
+    "python setup.py install --user" - Install into $HOME/.local
+    "python setup.py install --venv" - Creates and installs into a virtual-env
 
-        sudo rpm -i bin/quantum-common*.rpm
-        sudo rpm -i bin/quantum-server*.rpm
-        sudo rpm -i bin/quantum-client*.rpm
+You can also run directly out of the source.
 
 To use:
 
-    > quantum
+    > quantum-server
     Will start the server
 
-    > quantum_cli list_nets totore
+    > quantum list_nets totore
     Will list networks on the server
 
-    > quantum_tests
+    > quantum-tests
     Will run the quantum tests
 
 
-To verify installation, run the command 'quantum', and in another window run the command 'quantum_cli list_nets tenant-id'.
+-------------------------------------------------------------------------------
 
+To build rpms:
 
-
+	python setup.py build rpm
 
 -------------------------------------------------------------------------------
 
-To install directly from source:
+To build debs:
 
-        sudo python setup.py install
-
--------------------------------------------------------------------------------
-
-To build and install rpms:
-
-	python setup.py bdist_rpm
-	su -c 'rpm -i dist/quantum*.rpm'
-
--------------------------------------------------------------------------------
-
-To build and install eggs:
-
-	python setup.py bdist_egg
-	sudo easy_install dist/quantum_*.egg
+	python setup.py build deb
 
 
 -------------------------------------------------------------------------------
