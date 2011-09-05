@@ -11,6 +11,9 @@ CONFIG_PATH = path.abspath('/etc/quantum')
 BASE_PACKAGES = ['common', 'server', 'client',]
 PLUGINS = ['plugins/sample-plugin']
 
+HAS_ALIEN = bool(install_venv.run_command(['which', 'alien']))
+HAS_FAKEROOT = bool(install_venv.run_command(['which', 'fakeroot']))
+
 
 def clean_path(dirty):
     """Makes sure path delimiters are OS compliant"""
@@ -33,7 +36,7 @@ def source_venv(venv):
     return install_venv.run_command(['source',
         path.join(venv, 'bin', 'activate')])
 
-def uninstall_packages(options):
+def uninstall_packages(options, args):
     cmd = ['pip', 'uninstall', '-y']
 
     for p in ['quantum-'+x.split('/')[-1] for x in BASE_PACKAGES+PLUGINS]:
@@ -46,7 +49,7 @@ def uninstall_packages(options):
         install_venv.run_command(pcmd)
         print "done."
 
-def install_packages(options):
+def install_packages(options, args):
     """Builds and installs packages"""
     # Start building a command list
     cmd = ['pip', 'install']
@@ -76,15 +79,37 @@ def install_packages(options):
         install_venv.run_command(pcmd)
         print "done."
 
-def build_packages():
+def build_packages(options, args):
+    if not args:
+        args = 'rpm'
+    if args not in ['rpm', 'deb', 'all']:
+        print "arg must be rpm, deb, or all"
+
     cmd = ['tools/build_rpms.sh']
     for p in BASE_PACKAGES+PLUGINS:
         print "Building %s rpm" % p
         pcmd = deepcopy(cmd)
-        pcmd.insert(1, p)
-        print " ".join(pcmd)
-        install_venv.run_command(pcmd)
+        pcmd.append(p)
+        #install_venv.run_command(pcmd)
         print "done."
+
+    if args is 'rpm':
+        return
+
+    cmd = ['tools/build_debs.sh']
+    if HAS_FAKEROOT:
+        cmd.insert(0, 'fakeroot')
+    try:
+        for p in BASE_PACKAGES+PLUGINS:
+            print "Building %s deb" % p
+            pcmd = deepcopy(cmd)
+            pcmd.append(p)
+            #install_venv.run_command(pcmd)
+            print "done."
+    except:
+        print "You must be root or install fakeroot"
+    #cmd = ['cp', './server/*.deb', ROOT+'/']
+    #install_venv.run_command(cmd)
 
 def main():
     print "Checking for virtual-env and easy_install"
@@ -93,7 +118,7 @@ def main():
     options, cmd, args = create_parser()
     
     # Execute command
-    globals()["%s_packages" % cmd]()
+    globals()["%s_packages" % cmd](options, args)
 
 if __name__ == "__main__":
     main()

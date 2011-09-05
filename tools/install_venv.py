@@ -51,7 +51,7 @@ def run_command(cmd, redirect_output=True, check_exit_code=True):
     proc = subprocess.Popen(cmd, cwd=ROOT, stdout=stdout)
     output = proc.communicate()[0]
     if check_exit_code and proc.returncode != 0:
-        die('Command "%s" failed.\n%s', ' '.join(cmd), output)
+        raise Exception('Command "%s" failed.\n%s' % (' '.join(cmd), output))
     return output
 
 
