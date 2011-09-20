@@ -1,0 +1,3 @@
+[console_scripts]
+quantum-tests = quantum.run_tests:main
+

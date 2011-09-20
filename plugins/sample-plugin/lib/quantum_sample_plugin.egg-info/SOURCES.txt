@@ -1,0 +1,11 @@
+setup.py
+lib/quantum/__init__.py
+lib/quantum/plugins/SamplePlugin.py
+lib/quantum/plugins/__init__.py
+lib/quantum_sample_plugin.egg-info/PKG-INFO
+lib/quantum_sample_plugin.egg-info/SOURCES.txt
+lib/quantum_sample_plugin.egg-info/dependency_links.txt
+lib/quantum_sample_plugin.egg-info/eager_resources.txt
+lib/quantum_sample_plugin.egg-info/namespace_packages.txt
+lib/quantum_sample_plugin.egg-info/requires.txt
+lib/quantum_sample_plugin.egg-info/top_level.txt

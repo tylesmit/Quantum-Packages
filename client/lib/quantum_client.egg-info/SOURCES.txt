@@ -1,0 +1,17 @@
+MANIFEST.in
+setup.py
+lib/quantum/__init__.py
+lib/quantum/cli.py
+lib/quantum/cli_lib.py
+lib/quantum/client.py
+lib/quantum/tests/__init__.py
+lib/quantum/tests/unit/__init__.py
+lib/quantum/tests/unit/test_clientlib.py
+lib/quantum_client.egg-info/PKG-INFO
+lib/quantum_client.egg-info/SOURCES.txt
+lib/quantum_client.egg-info/dependency_links.txt
+lib/quantum_client.egg-info/eager_resources.txt
+lib/quantum_client.egg-info/entry_points.txt
+lib/quantum_client.egg-info/namespace_packages.txt
+lib/quantum_client.egg-info/requires.txt
+lib/quantum_client.egg-info/top_level.txt
